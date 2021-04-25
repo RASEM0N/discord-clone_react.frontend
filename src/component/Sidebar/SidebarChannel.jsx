@@ -1,5 +1,5 @@
 import React from 'react'
-import './SidebarChannel.scss'
+import './style/SidebarChannel.scss'
 
 const SidebarChannel = ({ id, channel }) => {
     return (

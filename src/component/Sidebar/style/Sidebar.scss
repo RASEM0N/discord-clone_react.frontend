@@ -1,0 +1,121 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 0.25;
+  height: 100vh;
+  background-color: #2f3135;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2f3135;
+    color: white;
+    border-bottom: 3px solid #26282c;
+  }
+
+  //Channel
+
+  &__channels {
+    flex: 1;
+
+    &Header {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      padding: 10px;
+      background-color: #2f3135;
+      color: gray;
+    }
+
+    &List {
+
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__addChannel {
+    cursor: pointer;
+
+    :hover {
+      color: white;
+    }
+  }
+
+  // Voice & Profile
+  &__voice, &__profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: gray;
+    background-color: #2f3135;
+    padding: 10px;
+    border-top: 1px solid gray;
+
+    &Info {
+      flex: 1;
+      padding: 10px;
+
+      > h3 {
+        color: #4fb185;
+      }
+
+      > p {
+        font-size: smaller;
+      }
+    }
+
+    &Icon {
+      color: #4fb185;
+    }
+
+    &Icons {
+
+      > .MuiSvgIcon-root {
+        font-size: 21px;
+        padding: 10px;
+      }
+    }
+  }
+
+
+  // override Profile
+  &__profile {
+
+    &Info {
+      > h3{
+        color: white;
+      }
+    }
+
+    &Icons {
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
