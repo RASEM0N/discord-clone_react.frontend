@@ -6,6 +6,7 @@
   padding: 12px;
   border-bottom: 1px solid #2f3135;
 
+  // Left
   &__left {
     flex: 0.5;
     > h3 {
@@ -14,13 +15,13 @@
       color: white;
     }
   }
-
   &__hash {
     color: gray;
     font-size: 30px;
     //padding: 10px;
   }
 
+  // Right
   &__right {
     display: flex;
     flex: 0.5;
@@ -35,7 +36,6 @@
       }
     }
   }
-
   &__search {
     display: flex;
     align-items: center;

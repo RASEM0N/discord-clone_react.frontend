@@ -11,6 +11,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
     margin: 15px 20px;
+
     &::-webkit-scrollbar {
       width: 8px;
       height: 16px;
@@ -45,6 +46,8 @@
 
     > form {
       flex: 1;
+      display: flex;
+      justify-content: space-between;
     }
 
     > form > input {
@@ -54,10 +57,10 @@
       outline-width: 0;
       color: white;
       font-size: large;
+      flex: 0.9;
     }
 
     &Button {
-      display: none;
     }
 
     &Icons {

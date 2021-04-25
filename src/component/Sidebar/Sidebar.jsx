@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './style/Sidebar.scss'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import AddIcon from '@material-ui/icons/Add'
@@ -10,8 +10,35 @@ import { Avatar } from '@material-ui/core'
 import MicIcon from '@material-ui/icons/Mic'
 import HeadsetIcon from '@material-ui/icons/Headset'
 import SettingsIcon from '@material-ui/icons/Settings'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../store/user-reducer'
+import { fbAuth, fbFirebase } from '../../firebase'
 
 const Sidebar = () => {
+    const user = useSelector(selectUser)
+    const [channels, setChannels] = useState()
+
+    useEffect(() => {
+        fbFirebase.collection('channels').onSnapshot((snapshot) =>
+            setChannels(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    channel: doc.data(),
+                }))
+            )
+        )
+    }, [])
+
+    const handledAddChannel = () => {
+        const channelName = prompt('Enter a new channel name')
+
+        if (channelName) {
+            fbFirebase.collection('channels').add({
+                channelName: channelName,
+            })
+        }
+    }
+
     return (
         <div className="sidebar">
             <div className="sidebar__top">
@@ -26,13 +53,13 @@ const Sidebar = () => {
                         <h4>Text Channels</h4>
                     </div>
 
-                    <AddIcon className="sidebar__addChannel" />
+                    <AddIcon className="sidebar__addChannel" onClick={handledAddChannel} />
                 </div>
                 <div className="sidebar__channelsList">
-                    <SidebarChannel />
-                    <SidebarChannel />
-                    <SidebarChannel />
-                    <SidebarChannel />
+                    {channels &&
+                        channels.map(({ id, channel }) => {
+                            return <SidebarChannel id={id} channel={channel} key={id} />
+                        })}
                 </div>
             </div>
             <div className="sidebar__voice">
@@ -49,10 +76,10 @@ const Sidebar = () => {
             </div>
 
             <div className="sidebar__profile">
-                <Avatar src="https://i.pinimg.com/736x/6d/cb/58/6dcb58c96bb5e52e43d613c246ca094c.jpg" />
+                <Avatar src={user.photoURL} onClick={() => fbAuth.signOut()} />
                 <div className="sidebar__profileInfo">
-                    <h3>RASEM0n</h3>
-                    <p>#usernameID</p>
+                    <h3>{user.displayName}</h3>
+                    <p>#{user.uid.length > 15 ? `${user.uid.slice(0, 15)}...` : user.uid}</p>
                 </div>
                 <div className="sidebar__profileIcons">
                     <MicIcon />
